@@ -15,6 +15,7 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,6 +28,8 @@ public class formolustur extends JFrame{
      JPanel panelim;
      JLabel video_goruntusu;
       JButton kucult_buyult;
+      JButton cift_tik;
+      JButton sag_tik;
     public formolustur() throws HeadlessException {
                                 super("TEAMEYE");
                                 getinit();
@@ -48,16 +51,36 @@ public class formolustur extends JFrame{
             video_goruntusu.setBounds(33, 10, 320,182);
             video_goruntusu.setFocusable(Boolean.TRUE);
             video_goruntusu.setToolTipText("Video Acilacaktir");
-            //video_goruntusu.setText("Merhaba Mert");
+            video_goruntusu.setText("Merhaba");
             video_goruntusu.setVisible(Boolean.TRUE);
             video_goruntusu.setBorder(BorderFactory.createLineBorder(Color.red));
             panelim.add(video_goruntusu);
             
-              
+            
+            ImageIcon image = new ImageIcon("C:\\Users\\TugceNur\\Documents\\NetBeansProjects\\teameyes\\src\\paket1\\cift_tik.jpg");
+            JButton cift_tik = new JButton();
+            cift_tik.setIcon(image);
+            panelim.add(cift_tik);
+            cift_tik.setBounds(35, 200, 40, 30);
+            panelim.add(cift_tik);
+            
+            ImageIcon image2 = new ImageIcon("C:\\Users\\TugceNur\\Documents\\NetBeansProjects\\teameyes\\src\\paket1\\sag_tik.jpg");
+            JButton sag_tik = new JButton();
+            sag_tik.setIcon(image2);
+            panelim.add(sag_tik);
+            sag_tik.setBounds(100, 200, 40, 30);
+            panelim.add(sag_tik);
+            
+            JCheckBox tek_tik=new JCheckBox();            
+            tek_tik.setBounds(32, 250, 400, 100);
+            tek_tik.setText("Sistemdeki program/klasörlerin tek tık ile açılmasını sağlar.");
+            panelim.add(tek_tik);
+            
+            
             
           kucult_buyult=new JButton();
-           kucult_buyult.setBounds(300, 200, 80, 20);
-           kucult_buyult.setForeground(Color.red);
+           kucult_buyult.setBounds(275, 200, 80, 20);
+           kucult_buyult.setForeground(Color.black);
            kucult_buyult.setText("KÜÇÜLT");
            kucult_buyult.setToolTipText("EKRANI KUCULTMEYE VE BUYULTMEYE YARAR.");  
            kucult_buyult.setActionCommand("kucult");
