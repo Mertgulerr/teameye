@@ -3,7 +3,9 @@ package paket1;
 
 import java.awt.AWTEventMulticaster;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Point;
@@ -15,21 +17,23 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import  java.net.URL;
+import javax.swing.JCheckBox;
 
 public class formolustur extends JFrame{
 
     private  int width=400;
-    private  int height=400;
+    private  int height=300;
      JPanel panelim;
      JLabel video_goruntusu;
       JButton kucult_buyult;
       JButton cift_tik;
       JButton sag_tik;
+      JCheckBox tek_tikla_sistem;
     public formolustur() throws HeadlessException {
                                 super("TEAMEYE");
                                 getinit();
@@ -44,44 +48,24 @@ public class formolustur extends JFrame{
            panelim.setEnabled(true);
            panelim.setFocusable(Boolean.TRUE);
            panelim.setBounds(0, 0, width, height);
-           panelim.setBorder(BorderFactory.createLineBorder(Color.yellow));
+           panelim.setBackground(new Color(217, 242, 242));
+         //  panelim.setBorder(BorderFactory.createLineBorder(Color.yellow));
            
             video_goruntusu=new JLabel();
             video_goruntusu.setEnabled(true);
             video_goruntusu.setBounds(33, 10, 320,182);
             video_goruntusu.setFocusable(Boolean.TRUE);
-            video_goruntusu.setToolTipText("Video Acilacaktir");
-            video_goruntusu.setText("Merhaba");
+            //video_goruntusu.setToolTipText("Video Acilacaktir");
+          //  video_goruntusu.setText("Merhaba");
             video_goruntusu.setVisible(Boolean.TRUE);
-            video_goruntusu.setBorder(BorderFactory.createLineBorder(Color.red));
+           // video_goruntusu.setBorder(BorderFactory.createLineBorder(Color.red));
             panelim.add(video_goruntusu);
-            
-            
-            ImageIcon image = new ImageIcon("C:\\Users\\TugceNur\\Documents\\NetBeansProjects\\teameyes\\src\\paket1\\cift_tik.jpg");
-            JButton cift_tik = new JButton();
-            cift_tik.setIcon(image);
-            panelim.add(cift_tik);
-            cift_tik.setBounds(35, 200, 40, 30);
-            panelim.add(cift_tik);
-            
-            ImageIcon image2 = new ImageIcon("C:\\Users\\TugceNur\\Documents\\NetBeansProjects\\teameyes\\src\\paket1\\sag_tik.jpg");
-            JButton sag_tik = new JButton();
-            sag_tik.setIcon(image2);
-            panelim.add(sag_tik);
-            sag_tik.setBounds(100, 200, 40, 30);
-            panelim.add(sag_tik);
-            
-            JCheckBox tek_tik=new JCheckBox();            
-            tek_tik.setBounds(32, 250, 400, 100);
-            tek_tik.setText("Sistemdeki program/klasörlerin tek tık ile açılmasını sağlar.");
-            panelim.add(tek_tik);
-            
-            
-            
+ 
           kucult_buyult=new JButton();
-           kucult_buyult.setBounds(275, 200, 80, 20);
-           kucult_buyult.setForeground(Color.black);
+           kucult_buyult.setBounds(275, 200, 80, 30);
+           kucult_buyult.setForeground(Color.BLACK);
            kucult_buyult.setText("KÜÇÜLT");
+           kucult_buyult.setFont(new Font("Arial Black",Font.PLAIN,10));
            kucult_buyult.setToolTipText("EKRANI KUCULTMEYE VE BUYULTMEYE YARAR.");  
            kucult_buyult.setActionCommand("kucult");
         kucult_buyult.addActionListener(new ActionListener() {
@@ -92,19 +76,38 @@ public class formolustur extends JFrame{
                    try {
                         int genislik,yukseklik;
                       genislik=width-200;
-                      yukseklik=height-220;
+                      yukseklik=height-100;
                       panelim.setBounds(0,0,genislik,yukseklik);
-                      video_goruntusu.setBounds(20, 10, 160, 120);
-                      kucult_buyult.setBounds(60,140, 80, 20);
+                      video_goruntusu.setBounds(20, 10, 160, 140);
+                      kucult_buyult.setBounds(60,155, 80, 30);
                       getContentPane().setPreferredSize(new Dimension(genislik,yukseklik));
                     formolustur.this.pack();
                     String actioncom=e.getActionCommand();
                     actioncom="buyult";
+                    kucult_buyult.setActionCommand(actioncom);
+                    kucult_buyult.setText("BÜYÜLT");
                    }
                    catch (Exception e1) {
                        JOptionPane.showMessageDialog(null, e1.getMessage(),"Hata var",JOptionPane.WARNING_MESSAGE);
                    }
-                   
+                    }
+               else if (e.getActionCommand().equals("buyult")) 
+               {
+                   try {
+                       panelim.setBounds(0, 0, width, height);
+                        video_goruntusu.setBounds(33, 10, 320,182);
+                         kucult_buyult.setBounds(275, 200, 80, 30);
+                           getContentPane().setPreferredSize(new Dimension(width,height));
+                    formolustur.this.pack();
+                    String actioncommad1=e.getActionCommand();
+                    actioncommad1="kucult";
+                    kucult_buyult.setActionCommand(actioncommad1);
+                    kucult_buyult.setText("KÜÇÜLT");
+                       
+                   } catch (Exception e2) {
+                        JOptionPane.showMessageDialog(null, e2.getMessage(),"Hata var",JOptionPane.WARNING_MESSAGE);
+                   }
+         
                     }
                //şimdide büyütme işlemini gerçekleştirmen gerekiyo videonun okunan frame ayarlanıyını
                //değiştirmedim dogrudan kuculturken verdiğin değerleri silip yerine eski değerleri
@@ -117,6 +120,41 @@ public class formolustur extends JFrame{
             kucult_buyult.setVisible(Boolean.TRUE);
             panelim.add(kucult_buyult);
             
+            java.net.URL imgUrl=getClass().getResource("cift_tik.jpg");
+            ImageIcon icon=new ImageIcon(imgUrl);
+            cift_tik=new JButton();
+            cift_tik.setIcon(icon);
+            cift_tik.setActionCommand("cift_tiklama butonu");
+            cift_tik.setBounds(35, 200, 40, 30);
+            cift_tik.setCursor(Cursor.getDefaultCursor());
+            cift_tik.setEnabled(Boolean.TRUE);
+            cift_tik.setToolTipText("Fare ile Cift Tıklama yapmak icin kullan");
+            cift_tik.setFocusable(Boolean.TRUE);
+            panelim.add(cift_tik);
+            
+            java.net.URL imgUrl1=getClass().getResource("sag_tik.jpg");
+            ImageIcon icon1=new ImageIcon(imgUrl1);
+            sag_tik=new JButton();
+            sag_tik.setIcon(icon1);
+            sag_tik.setActionCommand("sag_tiklama butonu");
+            sag_tik.setBounds(100, 200, 40, 30);
+            sag_tik.setCursor(Cursor.getDefaultCursor());
+            sag_tik.setEnabled(Boolean.TRUE);
+            sag_tik.setToolTipText("Fare ile sag tiklam yapmak icin kullan");
+            sag_tik.setFocusable(Boolean.TRUE);
+            panelim.add(sag_tik);
+            
+            tek_tikla_sistem=new JCheckBox();
+            tek_tikla_sistem.setText("Sistemi Tek Tıklama ile Kullanmak İstermisiniz?");
+            tek_tikla_sistem.setBounds(32, 250, 350, 20);
+            tek_tikla_sistem.setEnabled(Boolean.TRUE);
+            tek_tikla_sistem.setSelected(Boolean.FALSE);
+            tek_tikla_sistem.setFocusable(Boolean.TRUE);
+            tek_tikla_sistem.setFont(new Font("Arial Black",Font.PLAIN,12));
+//            java.net.URL imgUrl2=getClass().getResource("configuration.png");
+//            ImageIcon icon2=new ImageIcon(imgUrl2);
+//            tek_tikla_sistem.setIcon(icon2);
+            panelim.add(tek_tikla_sistem);
             
               setSize(width, height);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
