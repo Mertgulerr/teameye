@@ -11,6 +11,12 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.Action;
@@ -164,6 +170,22 @@ public class formolustur extends JFrame{
             setLocationRelativeTo(null);
             setResizable(Boolean.FALSE);
             setEnabled(true);
+            addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    
+                }
+
+                @Override
+                public void keyPressed(KeyEvent event) {
+                System.out.print(event.getKeyChar()+"basıldı");
+                    }
+               
+                @Override
+                public void keyReleased(KeyEvent e) {
+                  
+                }
+            });
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(),"Hata mesajı",JOptionPane.ERROR_MESSAGE);
