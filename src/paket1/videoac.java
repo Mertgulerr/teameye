@@ -36,6 +36,7 @@ public class videoac {
     public static void main(String[] args) {
          System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
          CascadeClassifier cascadefaceclasifer=new CascadeClassifier("C:\\Users\\Mert\\Desktop\\opencv\\opencv\\build\\etc\\haarcascades\\haarcascade_frontalface_default.xml");
+         CascadeClassifier cascadeeyeClassifier=new CascadeClassifier("C:\\Users\\Mert\\Desktop\\opencv\\opencv\\build\\etc\\haarcascades\\haarcascade_eye.xml");
          formolustur yeni_form=new formolustur();
          yeni_form.setVisible(true);
          int goruntubuyutmekatsayisi=8;
@@ -63,24 +64,33 @@ public class videoac {
               for(Rect rect:faces.toArray())
               {
                   Imgproc.putText(yataysimetri, "", new Point(rect.x,rect.y), 1, 2, new Scalar(0, 0,255));
-                  Imgproc.rectangle(yataysimetri, new Point(rect.x,rect.y),new Point(rect.x+rect.width, rect.y+rect.height),new Scalar(0,0,0),3);
+                  Imgproc.rectangle(yataysimetri, new Point(rect.x,rect.y),new Point(rect.x+rect.width, rect.y+rect.height),new Scalar(0,0,0),1);
                   dikdortgen.x=rect.x;
                   dikdortgen.y=rect.y;
                  dikdortgen.width=rect.x+rect.width;
                 dikdortgen.height=rect.y+rect.height;
-                  System.out.println( dikdortgen.x+"---"+ dikdortgen.y+"---"+ dikdortgen.width+"----"+ dikdortgen.height);
+                 // System.out.println( dikdortgen.x+"---"+ dikdortgen.y+"---"+ dikdortgen.width+"----"+ dikdortgen.height);
                  
-                  try {
+                  try 
+                  {
                       kesilenresim=yataysimetri.submat(dikdortgen.x, dikdortgen.width, dikdortgen.y, dikdortgen.height);
                       Imgproc.resize(kesilenresim,kesilenresim,new Size(320,182),goruntubuyutmekatsayisi,goruntubuyutmekatsayisi,Imgproc.INTER_LINEAR);
+                      MatOfRect eyes = new MatOfRect();    
+                      cascadeeyeClassifier.detectMultiScale(kesilenresim, eyes);       
+              for (Rect rect1 : eyes.toArray())
+              {               
+                 Imgproc.putText(kesilenresim, "", new Point(rect1.x,rect1.y), 1, 2, new Scalar(0,0,255));           
+                 Imgproc.rectangle(kesilenresim, new Point(rect1.x, rect1.y), new Point(rect1.x + rect1.width, rect1.y + rect1.height),new Scalar(200, 200, 100),1);               
+              } 
                   } 
-                  catch (org.opencv.core.CvException e) {
+                  catch (org.opencv.core.CvException e) 
+                  {
                       System.out.println(e.getMessage());
                   }
               }
-              yeni_form.iconata(donustur(kesilenresim)); 
-                }
             
+              yeni_form.iconata(donustur(kesilenresim)); 
+            }
             kameraverisi=null;
             yataysimetri=null;
             kesilenresim=null;
